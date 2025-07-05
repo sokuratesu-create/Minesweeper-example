@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>マインスイーパー</h1>
+  <a href="{{ url_for('reset') }}">リセット</a>
+  {% if board.game_over %}
+    <h2>{{ "勝利！" if board.victory else "ゲームオーバー…" }}</h2>
+    <a href="{{ url_for('show_board', _external=False) }}">もう一度</a>
+  {% endif %}
+  <table>
+    {% for r in range(board.rows) %}
+      <tr>
+      {% for c in range(board.cols) %}
+        <td>
+          {% if board.revealed[r][c] %}
+            {% if board.grid[r][c] == '*' %}
+              💣
+            {% elif board.grid[r][c] == 0 %}
+              &nbsp;
+            {% else %}
+              {{ board.grid[r][c] }}
+            {% endif %}
+          {% else %}
+            <a href="{{ url_for('reveal', r=r, c=c) }}">
+              {% if board.flagged[r][c] %}
+                🚩
+              {% else %}
+                ■
+              {% endif %}
+            </a>
+            <a href="{{ url_for('flag', r=r, c=c) }}">F</a>
+          {% endif %}
+        </td>
+      {% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

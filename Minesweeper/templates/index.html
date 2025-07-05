@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>マインスイーパー - 難易度選択</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 マインスイーパー</h1>
+    <p>難易度を選んでゲームを始めよう！</p>
+    <div class="button-group">
+      <a class="btn easy" href="{{ url_for('set_difficulty', level='easy') }}">🟢 初級<br>(9×9 地雷10)</a>
+      <a class="btn medium" href="{{ url_for('set_difficulty', level='medium') }}">🟡 中級<br>(16×16 地雷40)</a>
+      <a class="btn hard" href="{{ url_for('set_difficulty', level='hard') }}">🔴 上級<br>(30×16 地雷99)</a>
+    </div>
+  </div>
+</body>
+</html>
